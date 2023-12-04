@@ -1,0 +1,110 @@
+#The bar settings for i3blocks
+######################################
+# color settings for bar and windows #
+######################################
+
+# Define colors variables:
+set $urgentred				#e53935
+set $white					#ffffff
+set $black					#000000
+set $purple					#e345ff
+set $darkgrey				#383c4a
+set $darkgreytrans			#383c4acc
+set $invisible				#00000001
+set $turqlight				#709595
+set $turqbright				#90b5b5
+set $turqlight2				#a0c5c5
+set $turqdark				#002525ee
+set $turqdark2				#204545ee
+set $yellowbrown			#e1b700
+set $pastelgreenlight 		#558055
+set $pastelgreenmedium 		#356035
+set $pastelgreendark		#154015
+set $pastelgreentextlight	#d6f9d6
+set $pastelgreentextdark	#86a986
+set $magentadark			#852F40
+set $magentadark2			#A54F60
+set $magentabright			#D57F90
+
+
+# define colors for windows:
+#class		        		border			bground			text			indicator		child_border
+client.focused		    	$turqbright2	$turqdark2		$turqbright		$magentabright	$turqbright
+client.unfocused	    	$turqdark		$turqdark		$turqlight		$magentadark2	$turqdark
+client.focused_inactive		$turqdark		$turqdark		$turqlight		$magentadark2	$turqdark
+client.urgent		    	$magentabright	$magentadark	$white			$yellowbrown	$black
+
+############################################
+# bar settings (input comes from i3blocks) #
+############################################
+
+# Start i3bar to display a workspace bar
+# (plus the system information i3status finds out, if available)
+
+# you can add different bars for multidisplay setups on each display:
+# set output HDMI-0 to the display you want the bar, --transparency can be set.
+# Transparency needs rgba color codes to be used where the last two letters are the transparency factor see here:
+# https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
+# #08052be6 --> e6=90%
+
+bar {
+	font pango: Liberation Mono Regular 10
+	status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	position top
+	height 18
+	i3bar_command i3bar --transparency
+	# it could be that you have no primary display set: set one (xrandr --output <output> --primary)
+	# reference: https://i3wm.org/docs/userguide.html#_tray_output
+	tray_output primary
+	output DisplayPort-1
+	output DisplayPort-0
+	tray_padding 0
+	#workspace_min_width 8
+
+	# When strip_workspace_numbers is set to yes,
+	# any workspace that has a name of the form
+	# “[n][:][NAME]” will display only the name.
+	strip_workspace_numbers no
+	##strip_workspace_name no
+	
+	colors {
+		separator          	$purple
+		background         $darkgreytrans
+		#background			$invisible
+		statusline         	$white
+		
+		#      				border	       			bg					txt						indicator
+		focused_workspace	$pastelgreentextlight  	$pastelgreenlight	$pastelgreentextlight	$purple
+		active_workspace	$pastelgreenlight   	$pastelgreenmedium	$pastelgreentextlight	$purple
+		inactive_workspace	$pastelgreenlight		$pastelgreendark	$pastelgreenlight		$purple
+		urgent_workspace	$magentabright    		$magentadark		$magentabright			$purple
+	}
+}
+
+bar {
+	font pango: Liberation Mono Regular 10
+	status_command i3blocks -c ~/.config/i3/i3blocks_vert.conf
+	output HDMI-A-1
+	position top
+	height 18
+	tray_output none
+	i3bar_command i3bar --transparency
+
+	# When strip_workspace_numbers is set to yes,
+	# any workspace that has a name of the form
+	# “[n][:][NAME]” will display only the name.
+	strip_workspace_numbers no
+	##strip_workspace_name no
+	#
+	colors {
+		separator          	$purple
+		background         	$darkgreytrans
+		statusline         	$white
+		
+		#      				border	       			bg					txt						indicator
+		focused_workspace	$pastelgreentextlight  	$pastelgreenlight	$pastelgreentextlight	$purple
+		active_workspace	$pastelgreenlight   	$pastelgreenmedium	$pastelgreentextlight	$purple
+		inactive_workspace	$pastelgreenlight		$pastelgreendark	$pastelgreenlight		$purple
+		urgent_workspace	$magentabright    		$magentadark		$magentabright			$purple
+	}
+}
